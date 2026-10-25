@@ -48,8 +48,8 @@ function init() {
       ctx.font = size + "px Arial";
     }
 
-    // Posisi asli (di bawah hati), tapi jangan sampai keluar dari layar
-    var y = Math.min(height / 2.2 + 400, height - size);
+    // Posisi asli (di bawah hati), tapi dinaikkan kalau layar pendek (HP) supaya tidak tertutup toolbar browser
+    var y = Math.min(height / 2.2 + 400, height * 0.85);
 
     ctx.fillStyle = "lightblue";
     ctx.textAlign = "center";
