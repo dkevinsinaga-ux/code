@@ -36,10 +36,24 @@ function init() {
   ctx.fillRect(0, 0, width, height);
 
   function drawText() {
-    ctx.font = "60px Arial";
+    var text = "I love you sayang";
+    var size = 60;
+    ctx.font = size + "px Arial";
+
+    // Kecilkan tulisan kalau layar sempit (HP) supaya tidak terpotong kiri-kanan
+    var textWidth = ctx.measureText(text).width;
+    var maxWidth = width * 0.9;
+    if (textWidth > maxWidth) {
+      size = Math.floor((size * maxWidth) / textWidth);
+      ctx.font = size + "px Arial";
+    }
+
+    // Posisi asli (di bawah hati), tapi jangan sampai keluar dari layar
+    var y = Math.min(height / 2.2 + 400, height - size);
+
     ctx.fillStyle = "lightblue";
     ctx.textAlign = "center";
-    ctx.fillText("I love you sayang", width / 2, height / 2.2 + 400);
+    ctx.fillText(text, width / 2, y);
   }
 
   function heartPosition(rad) {
