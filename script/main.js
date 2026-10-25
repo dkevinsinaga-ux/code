@@ -19,7 +19,7 @@ const messages = [
     "serius",
     "ini",
     "terakhir",
-    "tapi bohong hehe yahaha hayyuk",
+    "tapi bohong hehe yahaha",
     "aku tau pasti kamu kesal",
     "hmm",
     "yaudah deh",
@@ -76,6 +76,16 @@ var love = setInterval(function() {
 }, 500);
 
 showMessage();
+
+// Saat user menekan "back" dari love.html, browser (terutama di HP) sering
+// memulihkan halaman ini dari bfcache lengkap dengan state JS lamanya,
+// jadi currentPage masih di scene terakhir. Reset supaya mulai dari awal lagi.
+window.addEventListener('pageshow', function(e) {
+    if (e.persisted) {
+        currentPage = 0;
+        showMessage();
+    }
+});
 
 function clearMusicState() {
     localStorage.removeItem('musicPlaying');
