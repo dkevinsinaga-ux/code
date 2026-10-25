@@ -16,7 +16,28 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="script/main.js"></script>
+    <script src="script/main.js?v=4"></script>
+<script>
+    // Setiap kali halaman awal dibuka, cerita dimulai dari awal lagi:
+    // penanda "boleh ke love.html" dihapus, baru dipasang saat tombol ditekan.
+    try { sessionStorage.removeItem('fromIndex'); } catch (e) {}
+
+    document.querySelector('.next-button').addEventListener('click', function () {
+        try { sessionStorage.setItem('fromIndex', '1'); } catch (e) {}
+    });
+
+    // Kalau user menekan "back" dari love.html, browser memulihkan halaman ini
+    // dengan state lamanya (scene terakhir). Paksa mulai lagi dari scene pertama.
+    window.addEventListener('pageshow', function (e) {
+        var nav = performance.getEntriesByType('navigation')[0];
+        var fromBack = e.persisted || (nav && nav.type === 'back_forward');
+        if (fromBack) {
+            try { sessionStorage.removeItem('fromIndex'); } catch (err) {}
+            currentPage = 0;
+            showMessage();
+        }
+    });
+</script>
 <script>
     function setupMusic() {
         const music = document.getElementById('backgroundMusic');
@@ -54,6 +75,6 @@
 <audio id="backgroundMusic" loop>
     <source src="assets/blue.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
-</script>
+</audio>
 </body>
 </html>
