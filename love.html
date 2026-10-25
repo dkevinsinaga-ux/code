@@ -5,6 +5,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>❤️</title>
+  <script>
+    // Penjaga: love.html hanya boleh dibuka setelah menekan tombol "pencet aku"
+    // di index.html. Kalau dibuka langsung, kembalikan ke awal cerita.
+    try {
+      if (!sessionStorage.getItem('fromIndex')) {
+        location.replace('index.html');
+      }
+    } catch (e) {}
+  </script>
   <link rel="stylesheet" href="styles/love.css">
 </head>
 <body>
