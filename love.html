@@ -6,10 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>❤️</title>
   <script>
-    // Penjaga: love.html hanya boleh dibuka setelah menekan tombol "pencet aku"
-    // di index.html. Kalau dibuka langsung, kembalikan ke awal cerita.
+    // Penjaga sekali pakai: love.html hanya bisa dibuka tepat setelah menekan
+    // tombol "pencet aku" di index.html. Penandanya langsung dihapus begitu dibaca,
+    // jadi buka ulang / reload / buka langsung = kembali ke awal cerita.
     try {
-      if (!sessionStorage.getItem('fromIndex')) {
+      var boleh = sessionStorage.getItem('fromIndex');
+      sessionStorage.removeItem('fromIndex');
+      if (!boleh) {
         location.replace('index.html');
       }
     } catch (e) {}
